@@ -1,4 +1,4 @@
-//! Convert closures into a wakers.
+//! Convert closures into wakers.
 //!
 //! A [`Waker`] is just a fancy callback. This crate converts regular closures into wakers.
 
