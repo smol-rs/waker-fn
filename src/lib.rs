@@ -3,6 +3,8 @@
 //! A [`Waker`] is just a fancy callback. This crate converts regular closures into wakers.
 
 #![no_std]
+#![warn(missing_docs, missing_debug_implementations, rust_2018_idioms)]
+
 extern crate alloc;
 
 use alloc::sync::Arc;
