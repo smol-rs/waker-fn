@@ -2,9 +2,12 @@
 //!
 //! A [`Waker`] is just a fancy callback. This crate converts regular closures into wakers.
 
-use std::mem::{self, ManuallyDrop};
-use std::sync::Arc;
-use std::task::{RawWaker, RawWakerVTable, Waker};
+#![no_std]
+extern crate alloc;
+
+use alloc::sync::Arc;
+use core::mem::{self, ManuallyDrop};
+use core::task::{RawWaker, RawWakerVTable, Waker};
 
 /// Converts a closure into a [`Waker`].
 ///
