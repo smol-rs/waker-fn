@@ -1,9 +1,9 @@
 # waker-fn
 
-[![Build](https://github.com/stjepang/waker-fn/workflows/Build%20and%20test/badge.svg)](
-https://github.com/stjepang/waker-fn/actions)
+[![Build](https://github.com/smol-rs/waker-fn/workflows/Build%20and%20test/badge.svg)](
+https://github.com/smol-rs/waker-fn/actions)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](
-https://github.com/stjepang/waker-fn)
+https://github.com/smol-rs/waker-fn)
 [![Cargo](https://img.shields.io/crates/v/waker-fn.svg)](
 https://crates.io/crates/waker-fn)
 [![Documentation](https://docs.rs/waker-fn/badge.svg)](
