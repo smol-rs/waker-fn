@@ -10,4 +10,3 @@ homepage = "https://github.com/smol-rs/waker-fn"
 documentation = "https://docs.rs/waker-fn"
 keywords = ["async", "waker", "wake", "closure", "callback"]
 categories = ["concurrency"]
-readme = "README.md"
