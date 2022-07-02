@@ -43,7 +43,7 @@ impl<F: Fn() + Send + Sync + 'static> Helper<F> {
 
     unsafe fn clone_waker(ptr: *const ()) -> RawWaker {
         let arc = ManuallyDrop::new(Arc::from_raw(ptr as *const F));
-        mem::forget(arc.clone());
+        let _arc_clone: mem::ManuallyDrop<_> = arc.clone();
         RawWaker::new(ptr, &Self::VTABLE)
     }
 
