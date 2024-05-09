@@ -12,11 +12,14 @@
     html_logo_url = "https://raw.githubusercontent.com/smol-rs/smol/master/assets/images/logo_fullsize_transparent.png"
 )]
 
+#[cfg(not(feature = "portable-atomic"))]
 extern crate alloc;
 
-use alloc::sync::Arc;
-use alloc::task::Wake;
+#[cfg(not(feature = "portable-atomic"))]
+use alloc::{sync::Arc, task::Wake};
 use core::task::Waker;
+#[cfg(feature = "portable-atomic")]
+use portable_atomic_util::{task::Wake, Arc};
 
 /// Converts a closure into a [`Waker`].
 ///
@@ -38,6 +41,7 @@ pub fn waker_fn<F: Fn() + Send + Sync + 'static>(f: F) -> Waker {
 
 struct Helper<F>(F);
 
+#[cfg(not(feature = "portable-atomic"))]
 impl<F: Fn() + Send + Sync + 'static> Wake for Helper<F> {
     fn wake(self: Arc<Self>) {
         (self.0)();
@@ -45,5 +49,18 @@ impl<F: Fn() + Send + Sync + 'static> Wake for Helper<F> {
 
     fn wake_by_ref(self: &Arc<Self>) {
         (self.0)();
+    }
+}
+// Note: Unlike std::task::Wake, all methods take `this:` instead of `self:`.
+// This is because using portable_atomic_util::Arc as a receiver requires the
+// unstable arbitrary_self_types feature.
+#[cfg(feature = "portable-atomic")]
+impl<F: Fn() + Send + Sync + 'static> Wake for Helper<F> {
+    fn wake(this: Arc<Self>) {
+        (this.0)();
+    }
+
+    fn wake_by_ref(this: &Arc<Self>) {
+        (this.0)();
     }
 }

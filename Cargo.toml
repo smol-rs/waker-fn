@@ -15,3 +15,10 @@ documentation = "https://docs.rs/waker-fn"
 keywords = ["async", "waker", "wake", "closure", "callback"]
 categories = ["concurrency"]
 exclude = ["/.*"]
+
+[features]
+# Uses portable-atomic polyfill atomics on targets without them
+portable-atomic = ["portable-atomic-util"]
+
+[dependencies]
+portable-atomic-util = { version = "0.2", optional = true, default-features = false, features = ["alloc"] }
